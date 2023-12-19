@@ -25,6 +25,7 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
     @Override
     public Integer insert(Expense expense) {
         return jdbcTemplate.update(INSERT_EXPENSE,expense.getDescription(),expense.getAmount(),expense.getDate(),expense.getCategoryId());
+        
     }
 
     @Override
