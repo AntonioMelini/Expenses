@@ -9,6 +9,7 @@ public class ExpenseDto {
     private LocalDateTime date;
 
     public ExpenseDto() {
+
     }
 
     public ExpenseDto(String description, Double amount, Long categoryId, LocalDateTime date) {
