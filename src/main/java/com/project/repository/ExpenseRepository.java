@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface ExpenseRepository {
-    void insert(Expense expense);
+    Integer insert(Expense expense);
     List<ExpenseDto> getAll();
     ExpenseDto getById(Long  id);
     void updateById(Long id);
