@@ -1,7 +1,7 @@
 package com.project.repository;
-import com.project.dto.ExpenseCategoryDto;
+import com.project.entity.ExpenseCategory;
 
 public interface ExpenseCategoryRepository {
-    void insert(ExpenseCategoryDto expenseCategoryDto);
+    void insert(ExpenseCategory expenseCategory);
     void getCategoryByName(String name);
 }
