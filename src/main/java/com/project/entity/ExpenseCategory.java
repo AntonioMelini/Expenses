@@ -11,6 +11,9 @@ public class ExpenseCategory {
         this.id = id;
         this.name = name;
     }
+    public ExpenseCategory( String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;

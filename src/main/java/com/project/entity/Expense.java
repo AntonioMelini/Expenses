@@ -6,16 +6,24 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(Long id, String description, Double amount, LocalDateTime date) {
+    public Expense(Long id, String description, Double amount, LocalDateTime date,Long categoryId) {
         this.id = id;
         this.description = description;
         this.amount = amount;
         this.date = date;
+        this.categoryId = categoryId;
+    }
+    public Expense( String description, Double amount, LocalDateTime date,Long categoryId) {
+        this.description = description;
+        this.amount = amount;
+        this.date = date;
+        this.categoryId = categoryId;
     }
 
     private Long id;
     private String description;
     private Double amount;
+    private Long categoryId;
     private LocalDateTime date;
 
     public Long getId() {
