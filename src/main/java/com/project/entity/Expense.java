@@ -26,6 +26,14 @@ public class Expense {
     private Long categoryId;
     private LocalDateTime date;
 
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public Long getId() {
         return id;
     }
