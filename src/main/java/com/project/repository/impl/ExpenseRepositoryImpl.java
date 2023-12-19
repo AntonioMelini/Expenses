@@ -1,10 +1,14 @@
 package com.project.repository.impl;
 
+import com.project.dto.ExpenseDto;
 import com.project.repository.ExpenseRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ExpenseRepositoryImpl implements ExpenseRepository {
+
 
     @Override
     public void insert(ExpenseDto expenseDto) {
