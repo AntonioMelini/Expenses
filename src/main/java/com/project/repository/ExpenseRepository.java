@@ -1,7 +1,7 @@
 package com.project.repository;
 
 
-
+import com.project.dto.ExpenseDto;
 import java.util.List;
 
 public interface ExpenseRepository {
@@ -10,4 +10,5 @@ public interface ExpenseRepository {
     ExpenseDto getById(Long  id);
     void updateById(Long id);
     void deleteById(Long id);
+
 }
