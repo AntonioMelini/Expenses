@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class ExpenseRequestDto {
 
     private Double amount;
-    private ExpenseCategoryRequestDto categoryRequestDto;
+    private Long category_id;
     private String description;
     private LocalDateTime date;
 
@@ -17,12 +17,12 @@ public class ExpenseRequestDto {
         this.amount = amount;
     }
 
-    public ExpenseCategoryRequestDto getCategoryRequestDto() {
-        return categoryRequestDto;
+    public Long getCategory_id() {
+        return this.category_id;
     }
 
-    public void setCategoryRequestDto(ExpenseCategoryRequestDto categoryRequestDto) {
-        this.categoryRequestDto = categoryRequestDto;
+    public void setCategory_id(Long category_id) {
+        this.category_id = category_id;
     }
 
     public String getDescription() {
