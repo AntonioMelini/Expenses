@@ -1,14 +1,16 @@
 package com.project.controller;
 
 import com.project.dto.request.ExpenseCategoryRequestDto;
+import com.project.entity.ExpenseCategory;
 import com.project.service.ExpenseCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController()
-@RequestMapping(value = "/api/v1/categoryExpense")
+@RequestMapping(value = "/api/v1/expenseCategory")
 public class ExpenseCategoryController {
     private final ExpenseCategoryService expenseCategoryService;
     @Autowired
@@ -17,8 +19,12 @@ public class ExpenseCategoryController {
     }
 
     @PostMapping()
-    public String insertCategoryExpense(@RequestBody ExpenseCategoryRequestDto expenseCategoryRequestDto){
+    public String insertExpenseCategory(@RequestBody ExpenseCategoryRequestDto expenseCategoryRequestDto){
         return expenseCategoryService.insert(expenseCategoryRequestDto);
 
+    }
+    @GetMapping()
+    public List<ExpenseCategoryRequestDto> getAllExpenseCategory(){
+        return expenseCategoryService.getAll();
     }
 }

@@ -7,6 +7,8 @@ import com.project.service.ExpenseCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
     private final ExpenseCategoryRepository expenseCatergoryRepository;
@@ -21,6 +23,11 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
             return "No se creo nada, algo anda mal ";
         }
         return "Se creo perfectamente la categoria";
+    }
+
+    @Override
+    public List<ExpenseCategoryRequestDto> getAll() {
+        return expenseCatergoryRepository.getAll();
     }
 
     private ExpenseCategory mapToExpenseCategory(ExpenseCategoryRequestDto expenseCategoryRequestDto){

@@ -1,9 +1,13 @@
 package com.project.repository.impl;
 
+import com.project.dto.request.ExpenseCategoryRequestDto;
 import com.project.entity.ExpenseCategory;
+import com.project.entity.mapper.ExpenseCategoryMapper;
 import com.project.repository.ExpenseCategoryRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class ExpenseCategoryRepositoryImpl implements ExpenseCategoryRepository {
@@ -30,5 +34,10 @@ public class ExpenseCategoryRepositoryImpl implements ExpenseCategoryRepository 
     @Override
     public void getCategoryByName(String name) {
 
+    }
+
+    @Override
+    public List<ExpenseCategoryRequestDto> getAll() {
+        return jdbcTemplate.query(GET_ALL_EXPENSE_CATEGORY,new ExpenseCategoryMapper());
     }
 }
