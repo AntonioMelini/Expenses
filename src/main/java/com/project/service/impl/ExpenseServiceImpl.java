@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
@@ -20,8 +22,9 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public void getAllExpense() {
+    public List<ExpenseRequestDto> getAllExpenses() {
 
+        return expenseRepository.getAll();
     }
 
     @Override
@@ -54,7 +57,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         Expense expense = new Expense();
         expense.setDescription(expenseRequestDto.getDescription());
         expense.setAmount(expenseRequestDto.getAmount());
-        expense.setDate(LocalDateTime.now(ZoneId.of("GMT-3")).withNano(0));
+        expense.setDate(String.valueOf(LocalDateTime.now(ZoneId.of("GMT-3")).withNano(0)));
         expense.setCategory_id(expenseRequestDto.getCategory_id());
         return expense;
     }

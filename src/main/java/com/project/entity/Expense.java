@@ -6,14 +6,14 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(Long id, String description, Double amount, LocalDateTime date,Long category_id) {
+    public Expense(Long id, String description, Double amount, String date,Long category_id) {
         this.id = id;
         this.description = description;
         this.amount = amount;
         this.date = date;
         this.category_id = category_id;
     }
-    public Expense( String description, Double amount, LocalDateTime date,Long category_id) {
+    public Expense( String description, Double amount, String date,Long category_id) {
         this.description = description;
         this.amount = amount;
         this.date = date;
@@ -24,7 +24,7 @@ public class Expense {
     private String description;
     private Double amount;
     private Long category_id;
-    private LocalDateTime date;
+    private String date;
 
     public Long getCategory_id() {
         return category_id;
@@ -58,11 +58,11 @@ public class Expense {
         this.amount = amount;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

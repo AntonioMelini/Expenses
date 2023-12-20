@@ -2,6 +2,7 @@ package com.project.repository.impl;
 
 import com.project.dto.request.ExpenseRequestDto;
 import com.project.entity.Expense;
+import com.project.entity.mapper.ExpenseMapper;
 import com.project.repository.ExpenseRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -30,7 +31,7 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
 
     @Override
     public List<ExpenseRequestDto> getAll() {
-        return null;
+        return jdbcTemplate.query(GET_ALL_EXPENSE,new ExpenseMapper());
     }
 
     @Override

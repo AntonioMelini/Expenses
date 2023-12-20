@@ -7,7 +7,7 @@ public class ExpenseRequestDto {
     private Double amount;
     private Long category_id;
     private String description;
-    private LocalDateTime date;
+    private String date;
 
     public Double getAmount() {
         return amount;
@@ -33,11 +33,11 @@ public class ExpenseRequestDto {
         this.description = description;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }
