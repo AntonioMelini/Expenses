@@ -29,6 +29,9 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public void insertExpense(ExpenseRequestDto expenseRequestDto) {
         expenseRepository.insert(mapExpenseRequestDtoToExpenseDto(expenseRequestDto));
+
+
+
     }
 
     @Override
