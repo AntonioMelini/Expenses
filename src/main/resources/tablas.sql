@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS Expense(
 id INT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
 description VARCHAR(50) NOT NULL,
 amount Double NOT NULL,
-date VARCHAR(25) NOT NULL,
+date VARCHAR(30) NOT NULL,
 category_id INT NOT NULL,
   FOREIGN KEY (category_id) REFERENCES ExpenseCategory(id)
 )

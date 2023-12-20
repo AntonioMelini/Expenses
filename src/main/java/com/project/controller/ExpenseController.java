@@ -1,9 +1,12 @@
 package com.project.controller;
 
 import com.project.dto.request.ExpenseRequestDto;
+import com.project.entity.Expense;
 import com.project.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1")
@@ -16,7 +19,9 @@ public class ExpenseController {
     }
 
     @GetMapping("/expenses")
-    public void getAllExpense(){}
+    public List<ExpenseRequestDto> getAllExpense(){
+        return expenseService.getAllExpenses();
+    }
     @GetMapping("/expense/{id}")
     public void getExpenseById(){}
     @PostMapping("/expense")
