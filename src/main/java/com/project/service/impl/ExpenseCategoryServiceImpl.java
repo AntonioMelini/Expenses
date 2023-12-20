@@ -15,9 +15,12 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
         this.expenseCatergoryRepository=expenseCategoryRepository;
     }
     @Override
-    public void insert(ExpenseCategoryRequestDto expenseCategoryRequestDto) {
-        expenseCatergoryRepository.insert(mapToExpenseCategory(expenseCategoryRequestDto));
-
+    public String insert(ExpenseCategoryRequestDto expenseCategoryRequestDto) {
+        Integer rowsAffected= expenseCatergoryRepository.insert(mapToExpenseCategory(expenseCategoryRequestDto));
+        if(rowsAffected.equals(0)){
+            return "No se creo nada, algo anda mal ";
+        }
+        return "Se creo perfectamente la categoria";
     }
 
     private ExpenseCategory mapToExpenseCategory(ExpenseCategoryRequestDto expenseCategoryRequestDto){

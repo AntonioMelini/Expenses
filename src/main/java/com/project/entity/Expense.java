@@ -6,32 +6,32 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(Long id, String description, Double amount, LocalDateTime date,Long categoryId) {
+    public Expense(Long id, String description, Double amount, LocalDateTime date,Long category_id) {
         this.id = id;
         this.description = description;
         this.amount = amount;
         this.date = date;
-        this.categoryId = categoryId;
+        this.category_id = category_id;
     }
-    public Expense( String description, Double amount, LocalDateTime date,Long categoryId) {
+    public Expense( String description, Double amount, LocalDateTime date,Long category_id) {
         this.description = description;
         this.amount = amount;
         this.date = date;
-        this.categoryId = categoryId;
+        this.category_id = category_id;
     }
 
     private Long id;
     private String description;
     private Double amount;
-    private Long categoryId;
+    private Long category_id;
     private LocalDateTime date;
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Long getCategory_id() {
+        return category_id;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory_id(Long category_id) {
+        this.category_id = category_id;
     }
 
     public Long getId() {
