@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import com.project.dto.request.ExpenseRequestDto;
 import com.project.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,9 @@ public class ExpenseController {
     @GetMapping("/expense/{id}")
     public void getExpenseById(){}
     @PostMapping("/expense")
-    public void createExpense(){}
+    public String createExpense(@RequestBody ExpenseRequestDto expenseRequestDto){
+        return expenseService.insertExpense(expenseRequestDto);
+    }
     @PutMapping("/expense/{id}")
     public void updateExpenseById(){}
     @DeleteMapping("/expense/{id}")
