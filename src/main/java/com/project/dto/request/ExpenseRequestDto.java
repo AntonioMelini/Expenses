@@ -1,11 +1,9 @@
 package com.project.dto.request;
 
-import java.time.LocalDateTime;
-
 public class ExpenseRequestDto {
 
     private Double amount;
-    private Long category_id;
+    private int category_id;
     private String description;
     private String date;
 
@@ -17,11 +15,11 @@ public class ExpenseRequestDto {
         this.amount = amount;
     }
 
-    public Long getCategory_id() {
+    public int getCategory_id() {
         return this.category_id;
     }
 
-    public void setCategory_id(Long category_id) {
+    public void setCategory_id(int category_id) {
         this.category_id = category_id;
     }
 

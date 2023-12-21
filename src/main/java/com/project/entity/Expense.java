@@ -6,14 +6,14 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(Long id, String description, Double amount, String date,Long category_id) {
+    public Expense(Long id, String description, Double amount, String date,int category_id) {
         this.id = id;
         this.description = description;
         this.amount = amount;
         this.date = date;
         this.category_id = category_id;
     }
-    public Expense( String description, Double amount, String date,Long category_id) {
+    public Expense( String description, Double amount, String date,int category_id) {
         this.description = description;
         this.amount = amount;
         this.date = date;
@@ -23,14 +23,14 @@ public class Expense {
     private Long id;
     private String description;
     private Double amount;
-    private Long category_id;
+    private int category_id;
     private String date;
 
-    public Long getCategory_id() {
+    public int getCategory_id() {
         return category_id;
     }
 
-    public void setCategory_id(Long category_id) {
+    public void setCategory_id(int category_id) {
         this.category_id = category_id;
     }
 
