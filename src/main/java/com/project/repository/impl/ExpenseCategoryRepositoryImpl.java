@@ -40,4 +40,21 @@ public class ExpenseCategoryRepositoryImpl implements ExpenseCategoryRepository 
     public List<ExpenseCategoryRequestDto> getAll() {
         return jdbcTemplate.query(GET_ALL_EXPENSE_CATEGORY,new ExpenseCategoryMapper());
     }
+
+    @Override
+    public ExpenseCategoryRequestDto getById(int id) {
+        System.out.println("LLEGO A ExpenseCategoryRequestDto en repository: "+id);
+        /*
+        return jdbcTemplate.queryForObject(GET_EXPENSE_CATEGORY_BY_ID,new Object[] {id},new ExpenseCategoryMapper());
+
+         */
+        return jdbcTemplate.queryForObject(GET_EXPENSE_CATEGORY_BY_ID,(resultSet, rowNum) ->{
+            System.out.println("ENTRO AL MAPPER");
+            ExpenseCategoryRequestDto expenseCategory= new ExpenseCategoryRequestDto();
+            System.out.println("CREO EL REQUESTdto");
+            expenseCategory.setName(resultSet.getString("name"));
+            System.out.println("LE PUSO NOMBRE y DEVUELVe");
+            return expenseCategory;
+        },id );
+    }
 }

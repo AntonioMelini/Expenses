@@ -8,4 +8,6 @@ public interface ExpenseCategoryService {
     String insert(ExpenseCategoryRequestDto expenseCategoryRequestDto);
 
     List<ExpenseCategoryRequestDto> getAll();
+
+    ExpenseCategoryRequestDto getById(int id);
 }

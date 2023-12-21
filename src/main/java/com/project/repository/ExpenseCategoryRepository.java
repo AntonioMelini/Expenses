@@ -9,4 +9,6 @@ public interface ExpenseCategoryRepository {
     void getCategoryByName(String name);
 
     List<ExpenseCategoryRequestDto> getAll();
+
+    ExpenseCategoryRequestDto getById(int id);
 }

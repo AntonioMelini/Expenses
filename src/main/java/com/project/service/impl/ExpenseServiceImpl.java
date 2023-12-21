@@ -1,6 +1,7 @@
 package com.project.service.impl;
 
 import com.project.dto.request.ExpenseRequestDto;
+import com.project.dto.response.ExpenseResponseDto;
 import com.project.entity.Expense;
 import com.project.repository.ExpenseRepository;
 import com.project.service.ExpenseService;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -22,14 +22,14 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public List<ExpenseRequestDto> getAllExpenses() {
+    public List<ExpenseResponseDto> getAllExpenses() {
 
         return expenseRepository.getAll();
     }
 
     @Override
-    public void getExpenseById() {
-
+    public ExpenseResponseDto getExpenseById(int id) {
+        return expenseRepository.getById(id);
     }
 
     @Override

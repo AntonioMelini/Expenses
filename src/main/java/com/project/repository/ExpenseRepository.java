@@ -1,7 +1,7 @@
 package com.project.repository;
 
 
-import com.project.dto.request.ExpenseRequestDto;
+import com.project.dto.response.ExpenseResponseDto;
 import com.project.entity.Expense;
 
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface ExpenseRepository {
     Integer insert(Expense expense);
-    List<ExpenseRequestDto> getAll();
-    ExpenseRequestDto getById(Long  id);
-    void updateById(Long id);
-    void deleteById(Long id);
+    List<ExpenseResponseDto> getAll();
+    ExpenseResponseDto getById(int  id);
+    void updateById(int id);
+    void deleteById(int id);
 
 
 }

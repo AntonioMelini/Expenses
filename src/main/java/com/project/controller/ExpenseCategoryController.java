@@ -27,4 +27,10 @@ public class ExpenseCategoryController {
     public List<ExpenseCategoryRequestDto> getAllExpenseCategory(){
         return expenseCategoryService.getAll();
     }
+
+
+    @GetMapping("/{id}")
+    public  ExpenseCategoryRequestDto getExpenseCategoryById(@PathVariable int id){
+        return expenseCategoryService.getById(id);
+    }
 }
