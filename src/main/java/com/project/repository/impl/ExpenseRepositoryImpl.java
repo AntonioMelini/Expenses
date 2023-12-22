@@ -3,9 +3,11 @@ package com.project.repository.impl;
 import com.project.dto.request.ExpenseRequestDto;
 import com.project.dto.response.ExpenseResponseDto;
 import com.project.entity.Expense;
+import com.project.exception.expense.NoExpenseFound;
 import com.project.repository.ExpenseCategoryRepository;
 import com.project.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -45,12 +47,6 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
             dto.setAmount((Double) row.get("amount"));
             dto.setDate((String) row.get("date"));
             dto.setDescription((String) row.get("description"));
-            System.out.println("ESTO TIENE EL EXPENSE QUE BUSCAMOS: ");
-            System.out.println("amount: " + row.get("amount"));
-            System.out.println("date: " + row.get("date"));
-            System.out.println("description: " + row.get("description"));
-            System.out.println("id: " + row.get("id"));
-            System.out.println(row.get("category_id"));
             dto.setCategory_name(expenseCategoryRepository.getById((int) row.get("category_id")).getName());
             expenses.add(dto);
         }
@@ -77,37 +73,57 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
 */
     @Override
     public ExpenseResponseDto getById(Integer id) {
-        ExpenseResponseDto expenseResponseDto= jdbcTemplate.queryForObject(GET_EXPENSE_BY_ID,(resultSet,rowNum) ->{
-            ExpenseResponseDto dto = new ExpenseResponseDto();
-            dto.setAmount(resultSet.getDouble("amount"));
-            dto.setDate(resultSet.getString("date"));
-            dto.setDescription(resultSet.getString("description"));
-            dto.setCategory_name((expenseCategoryRepository.getById( resultSet.getInt("category_id"))).getName());
-            System.out.println("ESTO ES EL DTO "+ dto);
-            return dto;
-        },id);
-        return expenseResponseDto;
+        try {
+            ExpenseResponseDto expenseResponseDto= jdbcTemplate.queryForObject(GET_EXPENSE_BY_ID,(resultSet,rowNum) ->{
+                ExpenseResponseDto dto = new ExpenseResponseDto();
+                dto.setAmount(resultSet.getDouble("amount"));
+                dto.setDate(resultSet.getString("date"));
+                dto.setDescription(resultSet.getString("description"));
+                dto.setCategory_name((expenseCategoryRepository.getById( resultSet.getInt("category_id"))).getName());
+                System.out.println("ESTO ES EL DTO "+ dto);
+                return dto;
+            },id);
+            return expenseResponseDto;
+        }catch (EmptyResultDataAccessException e){
+            throw  new NoExpenseFound("No Expense found");
+        }
+
     }
     public ExpenseRequestDto getByIdERD(Integer id) {
-        ExpenseRequestDto expenseResponseDto= jdbcTemplate.queryForObject(GET_EXPENSE_BY_ID,(resultSet,rowNum) ->{
-            ExpenseRequestDto dto = new ExpenseRequestDto();
-            dto.setAmount(resultSet.getDouble("amount"));
-            dto.setDate(resultSet.getString("date"));
-            dto.setDescription(resultSet.getString("description"));
-            dto.setCategory_id(resultSet.getInt("category_id"));
-            return dto;
-        },id);
-        return expenseResponseDto;
+       try {
+           ExpenseRequestDto expenseResponseDto= jdbcTemplate.queryForObject(GET_EXPENSE_BY_ID,(resultSet,rowNum) ->{
+               ExpenseRequestDto dto = new ExpenseRequestDto();
+               dto.setAmount(resultSet.getDouble("amount"));
+               dto.setDate(resultSet.getString("date"));
+               dto.setDescription(resultSet.getString("description"));
+               dto.setCategory_id(resultSet.getInt("category_id"));
+               return dto;
+           },id);
+           return expenseResponseDto;
+       }catch (EmptyResultDataAccessException e){
+           throw  new NoExpenseFound("No Expense found");
+       }
+
     }
 
     @Override
     public Integer updateById(Integer id, ExpenseRequestDto expenseRequestDto) {
-        ExpenseRequestDto oldExpense= getByIdERD(id);
-        return  jdbcTemplate.update(UPDATE_EXPENSE,expenseRequestDto.getDescription() ==null ?  oldExpense.getDescription(): expenseRequestDto.getDescription()  ,expenseRequestDto.getAmount() !=null ? expenseRequestDto.getAmount() : oldExpense.getAmount()  ,expenseRequestDto.getDate() !=null ? expenseRequestDto.getDate() : oldExpense.getDate(),expenseRequestDto.getCategory_id() !=null ? expenseRequestDto.getCategory_id() : oldExpense.getCategory_id(),id);
+        try {
+            ExpenseRequestDto oldExpense = getByIdERD(id);
+            return jdbcTemplate.update(UPDATE_EXPENSE, expenseRequestDto.getDescription() == null ? oldExpense.getDescription() : expenseRequestDto.getDescription(), expenseRequestDto.getAmount() != null ? expenseRequestDto.getAmount() : oldExpense.getAmount(), expenseRequestDto.getDate() != null ? expenseRequestDto.getDate() : oldExpense.getDate(), expenseRequestDto.getCategory_id() != null ? expenseRequestDto.getCategory_id() : oldExpense.getCategory_id(), id);
+
+        }catch (EmptyResultDataAccessException e){
+            throw  new NoExpenseFound("No Expense found");
+        }
     }
 
     @Override
     public Integer deleteById(Integer id) {
-        return jdbcTemplate.update(DELETE_EXPENSE,id);
+        try {
+            return jdbcTemplate.update(DELETE_EXPENSE,id);
+        }catch (EmptyResultDataAccessException e){
+            throw  new NoExpenseFound("No Expense found");
+        }
+
     }
 }
