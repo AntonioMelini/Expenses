@@ -12,7 +12,7 @@ public interface ExpenseRepository {
     List<ExpenseResponseDto> getAll();
     ExpenseResponseDto getById(int  id);
     void updateById(int id);
-    void deleteById(int id);
+    Integer deleteById(int id);
 
 
 }

@@ -2,7 +2,6 @@ package com.project.repository.impl;
 
 import com.project.dto.response.ExpenseResponseDto;
 import com.project.entity.Expense;
-import com.project.entity.mapper.ExpenseMapper;
 import com.project.repository.ExpenseCategoryRepository;
 import com.project.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +99,7 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
     }
 
     @Override
-    public void deleteById(int id) {
-
+    public Integer deleteById(int id) {
+        return jdbcTemplate.update(DELETE_EXPENSE,id);
     }
 }

@@ -10,6 +10,6 @@ public interface ExpenseService {
      ExpenseResponseDto getExpenseById(int id);
      String insertExpense(ExpenseRequestDto expenseRequestDto);
      void updateExpenseById();
-     void deleteExpenseById();
+     String deleteExpenseById(int id);
 
 }
