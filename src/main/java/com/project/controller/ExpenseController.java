@@ -5,6 +5,8 @@ import com.project.dto.response.ExpenseResponseDto;
 import com.project.entity.Expense;
 import com.project.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,23 +22,33 @@ public class ExpenseController {
     }
 
     @GetMapping("/expenses")
-    public List<ExpenseResponseDto> getAllExpense(){
-        return expenseService.getAllExpenses();
+    public ResponseEntity<List<ExpenseResponseDto>>  getAllExpense(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(expenseService.getAllExpenses());
     }
     @GetMapping("/expense/{id}")
-    public ExpenseResponseDto getExpenseById(@PathVariable Integer id){
-        return expenseService.getExpenseById(id);
+    public ResponseEntity<ExpenseResponseDto> getExpenseById(@PathVariable Integer id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(expenseService.getExpenseById(id));
     }
     @PostMapping("/expense")
-    public String createExpense(@RequestBody ExpenseRequestDto expenseRequestDto){
-        return expenseService.insertExpense(expenseRequestDto);
+    public ResponseEntity<String> createExpense(@RequestBody ExpenseRequestDto expenseRequestDto){
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(expenseService.insertExpense(expenseRequestDto));
     }
     @PutMapping("/expense/{id}")
-    public String updateExpenseById(@PathVariable Integer id,@RequestBody ExpenseRequestDto expenseRequestDto){
-        return expenseService.updateExpenseById(id,expenseRequestDto);
+    public ResponseEntity<String> updateExpenseById(@PathVariable Integer id,@RequestBody ExpenseRequestDto expenseRequestDto){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(expenseService.updateExpenseById(id,expenseRequestDto));
     }
     @DeleteMapping("/expense/{id}")
-    public String deleteExpenseById(@PathVariable Integer id){
-        return expenseService.deleteExpenseById(id);
+    public ResponseEntity<String> deleteExpenseById(@PathVariable Integer id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(expenseService.deleteExpenseById(id));
     }
 }
