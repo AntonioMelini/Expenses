@@ -3,7 +3,9 @@ package com.project.repository.impl;
 import com.project.dto.request.ExpenseCategoryRequestDto;
 import com.project.entity.ExpenseCategory;
 import com.project.entity.mapper.ExpenseCategoryMapper;
+import com.project.exception.expenseCategory.NoExpenseCategoryFound;
 import com.project.repository.ExpenseCategoryRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -43,18 +45,19 @@ public class ExpenseCategoryRepositoryImpl implements ExpenseCategoryRepository 
 
     @Override
     public ExpenseCategoryRequestDto getById(int id) {
-        System.out.println("LLEGO A ExpenseCategoryRequestDto en repository: "+id);
-        /*
-        return jdbcTemplate.queryForObject(GET_EXPENSE_CATEGORY_BY_ID,new Object[] {id},new ExpenseCategoryMapper());
-
-         */
-        return jdbcTemplate.queryForObject(GET_EXPENSE_CATEGORY_BY_ID,(resultSet, rowNum) ->{
-            System.out.println("ENTRO AL MAPPER");
-            ExpenseCategoryRequestDto expenseCategory= new ExpenseCategoryRequestDto();
-            System.out.println("CREO EL REQUESTdto");
-            expenseCategory.setName(resultSet.getString("name"));
-            System.out.println("LE PUSO NOMBRE y DEVUELVe");
-            return expenseCategory;
-        },id );
+        try {
+            return jdbcTemplate.queryForObject(GET_EXPENSE_CATEGORY_BY_ID, (resultSet, rowNum) -> {
+                System.out.println("ENTRO AL MAPPER");
+                ExpenseCategoryRequestDto expenseCategory = new ExpenseCategoryRequestDto();
+                System.out.println("CREO EL REQUESTdto");
+                expenseCategory.setName(resultSet.getString("name"));
+                System.out.println("LE PUSO NOMBRE y DEVUELVe");
+                return expenseCategory;
+            }, id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NoExpenseCategoryFound("No ExpenseCategory Found");
+        }
     }
+
+
 }
