@@ -3,6 +3,7 @@ package com.project.controller;
 import com.project.dto.request.ExpenseCategoryRequestDto;
 import com.project.entity.ExpenseCategory;
 import com.project.service.ExpenseCategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class ExpenseCategoryController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> insertExpenseCategory(@RequestBody ExpenseCategoryRequestDto expenseCategoryRequestDto){
+    public ResponseEntity<String> insertExpenseCategory(@Valid @RequestBody ExpenseCategoryRequestDto expenseCategoryRequestDto){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(expenseCategoryService.insert(expenseCategoryRequestDto));
