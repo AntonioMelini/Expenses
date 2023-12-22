@@ -1,10 +1,21 @@
 package com.project.dto.request;
 
-public class ExpenseRequestDto {
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+
+public class ExpenseRequestDto {
+@Valid
+    @NotNull(message="amount is obligatory")
+    @Min(value = 0,message = "The amount cant be lowwer than 0")
     private Double amount;
+    @NotNull(message="category_id is obligatory")
+    @Min(value = 1,message = "The category_id cant be lowwer than 1")
     private Integer category_id;
+    @NotNull(message="description is obligatory")
+    @NotBlank(message = "description is obligatory")
     private String description;
+
     private String date;
 
     public Double getAmount() {

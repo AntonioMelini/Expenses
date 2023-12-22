@@ -1,9 +1,22 @@
 package com.project.dto.response;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class ExpenseResponseDto {
+    @NotNull(message="amount is obligatory")
+    @Min(value = 0,message = "The amount cant be lowwer than 0")
     private Double amount;
+    @NotNull(message="category_name is obligatory")
+    @NotBlank(message = "category_name is obligatory")
     private String category_name;
+    @NotNull(message="description is obligatory")
+    @NotBlank(message = "description is obligatory")
     private String description;
+    @NotNull(message="date is obligatory")
+    @NotBlank(message = "date is obligatory")
     private String date;
 
     public ExpenseResponseDto(Double amount, String category_name, String description, String date) {
