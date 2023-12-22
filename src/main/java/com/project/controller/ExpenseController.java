@@ -34,5 +34,7 @@ public class ExpenseController {
     @PutMapping("/expense/{id}")
     public void updateExpenseById(){}
     @DeleteMapping("/expense/{id}")
-    public void deleteExpenseById(){}
+    public String deleteExpenseById(@PathVariable int id){
+        return expenseService.deleteExpenseById(id);
+    }
 }

@@ -45,8 +45,10 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public void deleteExpenseById() {
-
+    public String deleteExpenseById(int id) {
+        Integer rowsAffected= expenseRepository.deleteById(id);
+        if (rowsAffected.equals(0)) return "NO se pudo eliminar nada";
+        return  "Se elimino perfectamente";
     }
 
 
