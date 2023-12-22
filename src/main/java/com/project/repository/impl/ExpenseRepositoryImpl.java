@@ -1,5 +1,6 @@
 package com.project.repository.impl;
 
+import com.project.dto.request.ExpenseRequestDto;
 import com.project.dto.response.ExpenseResponseDto;
 import com.project.entity.Expense;
 import com.project.repository.ExpenseCategoryRepository;
@@ -17,7 +18,7 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
     private static final String GET_EXPENSE_BY_ID ="SELECT * FROM Expense WHERE id=?";
     private static final String GET_ALL_EXPENSE ="SELECT * FROM Expense";
     private static final String INSERT_EXPENSE="INSERT INTO Expense (description,amount,date,category_id) VALUES(?,?,?,?)";
-    private static final String UPDATE_EXPENSE ="UPDATE Expense SET description=?,amount=?,date=?,category_id=?= WHERE id=?";
+    private static final String UPDATE_EXPENSE ="UPDATE Expense SET description=?,amount=?,date=?,category_id=?  WHERE id=?";
     private static final String DELETE_EXPENSE ="DELETE FROM Expense WHERE id=?";
 
     private final JdbcTemplate jdbcTemplate;
@@ -75,31 +76,38 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
     }
 */
     @Override
-    public ExpenseResponseDto getById(int id) {
+    public ExpenseResponseDto getById(Integer id) {
         ExpenseResponseDto expenseResponseDto= jdbcTemplate.queryForObject(GET_EXPENSE_BY_ID,(resultSet,rowNum) ->{
             ExpenseResponseDto dto = new ExpenseResponseDto();
             dto.setAmount(resultSet.getDouble("amount"));
             dto.setDate(resultSet.getString("date"));
             dto.setDescription(resultSet.getString("description"));
-            System.out.println("ESTO TIENE EL EXPENSE QUE BUSCAMOS: "+id);
-            System.out.println("amount: "+resultSet.getDouble("amount"));
-            System.out.println("date: "+resultSet.getString("date"));
-            System.out.println("description: "+resultSet.getString("description"));
-            System.out.println("category_id: "+resultSet.getInt("category_id"));
             dto.setCategory_name((expenseCategoryRepository.getById( resultSet.getInt("category_id"))).getName());
             System.out.println("ESTO ES EL DTO "+ dto);
             return dto;
         },id);
         return expenseResponseDto;
     }
-
-    @Override
-    public void updateById(int id) {
-
+    public ExpenseRequestDto getByIdERD(Integer id) {
+        ExpenseRequestDto expenseResponseDto= jdbcTemplate.queryForObject(GET_EXPENSE_BY_ID,(resultSet,rowNum) ->{
+            ExpenseRequestDto dto = new ExpenseRequestDto();
+            dto.setAmount(resultSet.getDouble("amount"));
+            dto.setDate(resultSet.getString("date"));
+            dto.setDescription(resultSet.getString("description"));
+            dto.setCategory_id(resultSet.getInt("category_id"));
+            return dto;
+        },id);
+        return expenseResponseDto;
     }
 
     @Override
-    public Integer deleteById(int id) {
+    public Integer updateById(Integer id, ExpenseRequestDto expenseRequestDto) {
+        ExpenseRequestDto oldExpense= getByIdERD(id);
+        return  jdbcTemplate.update(UPDATE_EXPENSE,expenseRequestDto.getDescription() ==null ?  oldExpense.getDescription(): expenseRequestDto.getDescription()  ,expenseRequestDto.getAmount() !=null ? expenseRequestDto.getAmount() : oldExpense.getAmount()  ,expenseRequestDto.getDate() !=null ? expenseRequestDto.getDate() : oldExpense.getDate(),expenseRequestDto.getCategory_id() !=null ? expenseRequestDto.getCategory_id() : oldExpense.getCategory_id(),id);
+    }
+
+    @Override
+    public Integer deleteById(Integer id) {
         return jdbcTemplate.update(DELETE_EXPENSE,id);
     }
 }

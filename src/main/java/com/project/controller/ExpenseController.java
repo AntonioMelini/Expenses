@@ -24,7 +24,7 @@ public class ExpenseController {
         return expenseService.getAllExpenses();
     }
     @GetMapping("/expense/{id}")
-    public ExpenseResponseDto getExpenseById(@PathVariable int id){
+    public ExpenseResponseDto getExpenseById(@PathVariable Integer id){
         return expenseService.getExpenseById(id);
     }
     @PostMapping("/expense")
@@ -32,9 +32,11 @@ public class ExpenseController {
         return expenseService.insertExpense(expenseRequestDto);
     }
     @PutMapping("/expense/{id}")
-    public void updateExpenseById(){}
+    public String updateExpenseById(@PathVariable Integer id,@RequestBody ExpenseRequestDto expenseRequestDto){
+        return expenseService.updateExpenseById(id,expenseRequestDto);
+    }
     @DeleteMapping("/expense/{id}")
-    public String deleteExpenseById(@PathVariable int id){
+    public String deleteExpenseById(@PathVariable Integer id){
         return expenseService.deleteExpenseById(id);
     }
 }

@@ -28,7 +28,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public ExpenseResponseDto getExpenseById(int id) {
+    public ExpenseResponseDto getExpenseById(Integer id) {
         return expenseRepository.getById(id);
     }
 
@@ -40,12 +40,14 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public void updateExpenseById() {
-
+    public String updateExpenseById(Integer id,ExpenseRequestDto expenseRequestDto) {
+        Integer rowsAffected= expenseRepository.updateById(id,expenseRequestDto);
+        if (rowsAffected.equals(0)) return "No se elimino nada";
+        return "Se modifico correctamente la expensa";
     }
 
     @Override
-    public String deleteExpenseById(int id) {
+    public String deleteExpenseById(Integer id) {
         Integer rowsAffected= expenseRepository.deleteById(id);
         if (rowsAffected.equals(0)) return "NO se pudo eliminar nada";
         return  "Se elimino perfectamente";
