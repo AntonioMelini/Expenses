@@ -35,6 +35,7 @@ public class ExpenseController {
                 .body(expenseService.getExpenseById(id));
     }
     @PostMapping("/expense")
+    // En createExpense la category_id la damos por sabida ya que en un futuro se generara un front end con todas las categorias para seleccionarlas al momento de la creacion.
     public ResponseEntity<String> createExpense(@Valid @RequestBody  ExpenseRequestDto expenseRequestDto){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
