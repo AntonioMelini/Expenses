@@ -44,15 +44,15 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public String updateExpenseById(Integer id,ExpenseRequestDto expenseRequestDto) {
         Integer rowsAffected= expenseRepository.updateById(id,expenseRequestDto);
-        if (rowsAffected.equals(0)) return "No se elimino nada";
-        return "Se modifico correctamente la expensa";
+        if (rowsAffected.equals(0)) return "No se elimino La Expense";
+        return "Se modifico correctamente la Expense";
     }
 
     @Override
     public String deleteExpenseById(Integer id) {
         Integer rowsAffected= expenseRepository.deleteById(id);
-        if (rowsAffected.equals(0)) return "NO se pudo eliminar nada";
-        return  "Se elimino perfectamente";
+        if (rowsAffected.equals(0)) return "NO se pudo eliminar la Expense";
+        return  "Se elimino perfectamente la Expense";
     }
 
 

@@ -29,9 +29,7 @@ public class ExpenseMapper implements RowMapper<ExpenseResponseDto> {
             expense.setDate(rs.getString("date"));
             expense.setAmount(rs.getDouble("amount"));
             expense.setDescription(rs.getString("description"));
-            System.out.println("hasta aca todo bien ////");
             expense.setCategory_name((expenseCategoryRepository.getById( rs.getInt("id")).getName()));
-            System.out.println("NO DEBERIA LLEGAR ////");
             return expense;
 
     }

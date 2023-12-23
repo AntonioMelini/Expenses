@@ -20,9 +20,9 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
     public String insert(ExpenseCategoryRequestDto expenseCategoryRequestDto) {
         Integer rowsAffected= expenseCatergoryRepository.insert(mapToExpenseCategory(expenseCategoryRequestDto));
         if(rowsAffected.equals(0)){
-            return "No se creo nada, algo anda mal ";
+            return "No se creo la ExpenseCAtegory ";
         }
-        return "Se creo perfectamente la categoria";
+        return "Se creo perfectamente la ExpenseCategory";
     }
 
     @Override

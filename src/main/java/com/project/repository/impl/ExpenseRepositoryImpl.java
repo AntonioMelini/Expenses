@@ -53,24 +53,6 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
         return expenses;
     }
 
-/*
-    @Override
-    public List<ExpenseResponseDto> getAll() {
-        List<ExpenseResponseDto> expenses= jdbcTemplate.queryForObject(GET_ALL_EXPENSE,(resultSet,rowNum) ->{
-          while (resultSet.next()){
-              List<ExpenseResponseDto> expensesv1=new ArrayList<>();
-              ExpenseResponseDto dto = new ExpenseResponseDto();
-              dto.setAmount(resultSet.getDouble("amount"));
-              dto.setDate(resultSet.getString("date"));
-              dto.setDescription(resultSet.getString("description"));
-              dto.setCategory_name(expenseCategoryRepository.getById((long) resultSet.getInt("id")).getName());
-              expensesv1.add(dto);
-          }
-
-        });
-        return expenses;
-    }
-*/
     @Override
     public ExpenseResponseDto getById(Integer id) {
         try {
