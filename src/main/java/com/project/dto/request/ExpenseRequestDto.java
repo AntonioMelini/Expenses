@@ -18,6 +18,16 @@ public class ExpenseRequestDto {
 
     private String date;
 
+    public ExpenseRequestDto() {
+    }
+
+    public ExpenseRequestDto(Double amount, Integer category_id, String description, String date) {
+        this.amount = amount;
+        this.category_id = category_id;
+        this.description = description;
+        this.date = date;
+    }
+
     public Double getAmount() {
         return amount;
     }

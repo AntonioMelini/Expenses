@@ -47,11 +47,8 @@ public class ExpenseCategoryRepositoryImpl implements ExpenseCategoryRepository 
     public ExpenseCategoryRequestDto getById(int id) {
         try {
             return jdbcTemplate.queryForObject(GET_EXPENSE_CATEGORY_BY_ID, (resultSet, rowNum) -> {
-                System.out.println("ENTRO AL MAPPER");
                 ExpenseCategoryRequestDto expenseCategory = new ExpenseCategoryRequestDto();
-                System.out.println("CREO EL REQUESTdto");
                 expenseCategory.setName(resultSet.getString("name"));
-                System.out.println("LE PUSO NOMBRE y DEVUELVe");
                 return expenseCategory;
             }, id);
         } catch (EmptyResultDataAccessException e) {

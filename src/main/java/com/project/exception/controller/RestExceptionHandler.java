@@ -23,14 +23,12 @@ import java.util.Map;
 public class RestExceptionHandler {
     @ExceptionHandler(value = {NoExpenseFound.class})
     public ResponseEntity<ApiError> handleNoExpenseFoundException(NoExpenseFound e){
-        System.out.println("nono");
         ApiError error= new ApiError(400,e.getMessage(),LocalDateTime.now(ZoneId.of("GMT-3")).withNano(0));
 
         return  new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(value = NoExpenseCategoryFound.class)
     public ResponseEntity<ApiError> handleNoExpenseCategoryFoundException(NoExpenseCategoryFound e){
-        System.out.println("paso por alla");
         ApiError error= new ApiError(400,e.getMessage(),LocalDateTime.now(ZoneId.of("GMT-3")).withNano(0));
         return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
     }
@@ -41,7 +39,6 @@ public class RestExceptionHandler {
 
         Map<String, String> error= new HashMap<>();
         e.getBindingResult().getAllErrors().forEach((err)-> {
-            System.out.println("paso por aca");
            String fieldName= ((FieldError)err).getField();
            String errorMessage= err.getDefaultMessage();
             error.put(fieldName,errorMessage);
