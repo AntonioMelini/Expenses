@@ -6,14 +6,15 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(Long id, String description, Double amount, String date,int category_id) {
+    public Expense(Long id, String description, Double amount, int category_id, String date) {
         this.id = id;
         this.description = description;
         this.amount = amount;
-        this.date = date;
         this.category_id = category_id;
+        this.date = date;
     }
-    public Expense( String description, Double amount, String date,int category_id) {
+
+    public Expense(String description, Double amount, String date, int category_id) {
         this.description = description;
         this.amount = amount;
         this.date = date;
