@@ -1,31 +1,33 @@
-package com.project.dto.request;
+package com.project.dto.response;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
-
-public class ExpenseRequestDto {
-@Valid
+public class ExpenseResponseDto {
     @NotNull(message="amount is obligatory")
     @Min(value = 0,message = "The amount cant be lowwer than 0")
     private Double amount;
-    @NotNull(message="category_id is obligatory")
-    @Min(value = 1,message = "The category_id cant be lowwer than 1")
-    private Integer category_id;
+    @NotNull(message="category_name is obligatory")
+    @NotBlank(message = "category_name is obligatory")
+    private String category_name;
     @NotNull(message="description is obligatory")
     @NotBlank(message = "description is obligatory")
     private String description;
-
+    @NotNull(message="date is obligatory")
+    @NotBlank(message = "date is obligatory")
     private String date;
 
-    public ExpenseRequestDto() {
-    }
-
-    public ExpenseRequestDto(Double amount, Integer category_id, String description, String date) {
+    public ExpenseResponseDto(Double amount, String category_name, String description, String date) {
         this.amount = amount;
-        this.category_id = category_id;
+        this.category_name = category_name;
         this.description = description;
         this.date = date;
+    }
+
+    public ExpenseResponseDto() {
+
     }
 
     public Double getAmount() {
@@ -36,12 +38,12 @@ public class ExpenseRequestDto {
         this.amount = amount;
     }
 
-    public Integer getCategory_id() {
-        return this.category_id;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
 
     public String getDescription() {
