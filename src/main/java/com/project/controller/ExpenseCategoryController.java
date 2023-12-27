@@ -42,6 +42,8 @@ public class ExpenseCategoryController {
                 .body(expenseCategoryService.getById(id));
     }
 
+
+
     @GetMapping("/byName/{name}")
     public  ResponseEntity<ExpenseCategoryRequestDto> getExpenseCategoryByName(@PathVariable String name){
         return ResponseEntity

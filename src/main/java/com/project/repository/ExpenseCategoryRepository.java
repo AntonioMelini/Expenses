@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface ExpenseCategoryRepository {
     Integer insert(ExpenseCategory expenseCategory);
-   // void getCategoryByName(String name);
 
     List<ExpenseCategoryRequestDto> getAll();
 

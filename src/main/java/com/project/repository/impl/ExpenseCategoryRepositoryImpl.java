@@ -25,13 +25,17 @@ public class ExpenseCategoryRepositoryImpl implements ExpenseCategoryRepository 
 
 
 
+
+
     public ExpenseCategoryRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
 
     @Override
+
     public Integer insert(ExpenseCategory expenseCategory) {
+
         List<ExpenseCategoryRequestDto> categories= getAll();
         System.out.println("1) "+categories.size());
         List<ExpenseCategoryRequestDto> filtered= categories.stream().filter(category -> category.getName().equals(expenseCategory.getName())).collect(Collectors.toList());
