@@ -2,6 +2,7 @@ package com.project.service.impl;
 
 import com.project.dto.request.ExpenseCategoryRequestDto;
 import com.project.entity.ExpenseCategory;
+import com.project.exception.expenseCategory.ExpenseCategoryNameError;
 import com.project.repository.ExpenseCategoryRepository;
 import com.project.service.ExpenseCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
     public String insert(ExpenseCategoryRequestDto expenseCategoryRequestDto) {
         Integer rowsAffected= expenseCatergoryRepository.insert(mapToExpenseCategory(expenseCategoryRequestDto));
         if(rowsAffected.equals(0)){
-            return "No se creo nada, algo anda mal ";
+            return "No se creo la ExpenseCAtegory ";
         }
-        return "Se creo perfectamente la categoria";
+        return "Se creo perfectamente la ExpenseCategory";
     }
 
     @Override
@@ -37,12 +38,17 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
 
     @Override
     public ExpenseCategoryRequestDto getByName(String name) {
-        return expenseCatergoryRepository.getCategoryByName(name);
+
+        return expenseCatergoryRepository.getByName(name);
+
     }
 
     private ExpenseCategory mapToExpenseCategory(ExpenseCategoryRequestDto expenseCategoryRequestDto){
-        ExpenseCategory expenseCategory=new ExpenseCategory();
-        expenseCategory.setName(expenseCategoryRequestDto.getName());
-        return expenseCategory;
+        if (expenseCategoryRequestDto.getName().matches((".*[a-z].*"))) {
+            ExpenseCategory expenseCategory = new ExpenseCategory();
+            expenseCategory.setName(expenseCategoryRequestDto.getName());
+            return expenseCategory;
+        }
+        throw new ExpenseCategoryNameError("Name must contain at least 1 letter!!");
     }
 }
