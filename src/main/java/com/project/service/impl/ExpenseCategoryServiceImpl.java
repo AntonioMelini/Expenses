@@ -35,6 +35,11 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
         return expenseCatergoryRepository.getById(id);
     }
 
+    @Override
+    public ExpenseCategoryRequestDto getByName(String name) {
+        return expenseCatergoryRepository.getCategoryByName(name);
+    }
+
     private ExpenseCategory mapToExpenseCategory(ExpenseCategoryRequestDto expenseCategoryRequestDto){
         ExpenseCategory expenseCategory=new ExpenseCategory();
         expenseCategory.setName(expenseCategoryRequestDto.getName());

@@ -41,4 +41,10 @@ public class ExpenseCategoryController {
                 .status(HttpStatus.OK)
                 .body(expenseCategoryService.getById(id));
     }
+    @GetMapping("/byName/{name}")
+    public  ResponseEntity<ExpenseCategoryRequestDto> getExpenseCategoryByName(@PathVariable String name){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(expenseCategoryService.getByName(name));
+    }
 }

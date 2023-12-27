@@ -19,8 +19,9 @@ public class ExpenseCategoryRepositoryImpl implements ExpenseCategoryRepository 
     private static final String GET_EXPENSE_CATEGORY_BY_ID ="SELECT * FROM ExpenseCategory WHERE id=?";
     private static final String GET_ALL_EXPENSE_CATEGORY ="SELECT * FROM ExpenseCategory";
     private static final String INSERT_EXPENSE_CATEGORY="INSERT INTO ExpenseCategory (name) VALUES(?)";
-    private static final String UPDATE_EXPENSE_CATEGORY ="UPDATE ExpenseCategory SET name=?= WHERE id=?";
-    private static final String DELETE_EXPENSE_CATEGORY ="DELETE FROM ExpenseCategory WHERE id=?";
+    private static final String GET_EXPENSE_CATEGORY_BY_NAME ="SELECT * FROM ExpenseCategory WHERE name=?";
+
+
 
 
     public ExpenseCategoryRepositoryImpl(JdbcTemplate jdbcTemplate) {
@@ -29,12 +30,31 @@ public class ExpenseCategoryRepositoryImpl implements ExpenseCategoryRepository 
 
 
     @Override
+
     public Integer insert(ExpenseCategory expenseCategory) {
-        return jdbcTemplate.update(INSERT_EXPENSE_CATEGORY,expenseCategory.getName());
+
+           // ExpenseCategoryRequestDto result = getCategoryByName(expenseCategory.getName());
+            return jdbcTemplate.update(INSERT_EXPENSE_CATEGORY,expenseCategory.getName());
     }
 
+
+
     @Override
-    public void getCategoryByName(String name) {
+    public ExpenseCategoryRequestDto getCategoryByName(String name) {
+        try{
+            System.out.println("llego");
+            ExpenseCategoryRequestDto data= jdbcTemplate.queryForObject(GET_EXPENSE_CATEGORY_BY_NAME,new Object[]{name}, ExpenseCategoryRequestDto.class);
+            System.out.println(data);
+
+
+                if (!data.getName().equals(name))
+                    throw new NoExpenseCategoryFound("No ExpenseCategory Found");
+            return data;
+
+
+        }catch (EmptyResultDataAccessException e){
+            throw new NoExpenseCategoryFound("No ExpenseCategory Found");
+        }
 
     }
 
