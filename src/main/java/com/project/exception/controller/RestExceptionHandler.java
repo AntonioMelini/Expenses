@@ -2,6 +2,8 @@ package com.project.exception.controller;
 
 import com.project.exception.expense.NoExpenseFound;
 import com.project.exception.api.ApiError;
+import com.project.exception.expenseCategory.ExpenseCategoryAlreadyCraeted;
+import com.project.exception.expenseCategory.ExpenseCategoryNameError;
 import com.project.exception.expenseCategory.NoExpenseCategoryFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,17 @@ public class RestExceptionHandler {
     }
     @ExceptionHandler(value = NoExpenseCategoryFound.class)
     public ResponseEntity<ApiError> handleNoExpenseCategoryFoundException(NoExpenseCategoryFound e){
+        ApiError error= new ApiError(400,e.getMessage(),LocalDateTime.now(ZoneId.of("GMT-3")).withNano(0));
+        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = ExpenseCategoryAlreadyCraeted.class)
+    public ResponseEntity<ApiError> handleExpenseCategoryAlreadyCreated(ExpenseCategoryAlreadyCraeted e){
+        ApiError error= new ApiError(400,e.getMessage(),LocalDateTime.now(ZoneId.of("GMT-3")).withNano(0));
+        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(value = ExpenseCategoryNameError.class)
+    public ResponseEntity<ApiError> handleExpenseCategoryNameError(ExpenseCategoryNameError e){
         ApiError error= new ApiError(400,e.getMessage(),LocalDateTime.now(ZoneId.of("GMT-3")).withNano(0));
         return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
     }
