@@ -6,6 +6,8 @@ import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -20,5 +22,15 @@ public class UserServiceImpl implements UserService {
         Integer rowsAffected = userRepository.insert(userRequestDto);
         if (rowsAffected.equals(0)) return "No se pudo crear el usuario";
         return "Se creo correctamente el usuario";
+    }
+
+    @Override
+    public List<UserRequestDto> getAll() {
+        return userRepository.getAll();
+    }
+
+    @Override
+    public UserRequestDto getByEmail(String email) {
+        return userRepository.getByEmail(email);
     }
 }
