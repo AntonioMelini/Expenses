@@ -10,4 +10,6 @@ public interface ExpenseCategoryService {
     List<ExpenseCategoryRequestDto> getAll();
 
     ExpenseCategoryRequestDto getById(int id);
+
+    ExpenseCategoryRequestDto getByName(String name);
 }

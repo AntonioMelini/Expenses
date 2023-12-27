@@ -17,6 +17,7 @@ public class ExpenseCategoryRepositoryImpl implements ExpenseCategoryRepository 
     private final JdbcTemplate jdbcTemplate;
 
     private static final String GET_EXPENSE_CATEGORY_BY_ID ="SELECT * FROM ExpenseCategory WHERE id=?";
+    private static final String GET_EXPENSE_CATEGORY_BY_NAME ="SELECT * FROM ExpenseCategory WHERE name=?";
     private static final String GET_ALL_EXPENSE_CATEGORY ="SELECT * FROM ExpenseCategory";
     private static final String INSERT_EXPENSE_CATEGORY="INSERT INTO ExpenseCategory (name) VALUES(?)";
 
@@ -54,6 +55,16 @@ public class ExpenseCategoryRepositoryImpl implements ExpenseCategoryRepository 
                 return expenseCategory;
             }, id);
         } catch (EmptyResultDataAccessException e) {
+            throw new NoExpenseCategoryFound("No ExpenseCategory Found");
+        }
+    }
+
+    @Override
+    public ExpenseCategoryRequestDto getByName(String name) {
+        try {
+            return jdbcTemplate.queryForObject(GET_EXPENSE_CATEGORY_BY_NAME,new Object[] {name}, new ExpenseCategoryMapper());
+
+        }catch (EmptyResultDataAccessException e){
             throw new NoExpenseCategoryFound("No ExpenseCategory Found");
         }
     }
