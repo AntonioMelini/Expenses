@@ -1,6 +1,6 @@
 package com.project.entity;
 
 public enum Role {
-    USER,
+     USER,
     ADMIN
 }

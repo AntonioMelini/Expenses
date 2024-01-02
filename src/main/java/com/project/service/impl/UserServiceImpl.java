@@ -1,6 +1,7 @@
 package com.project.service.impl;
 
 import com.project.dto.request.UserRequestDto;
+import com.project.entity.User;
 import com.project.repository.UserRepository;
 import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Override
-    public String insert(UserRequestDto userRequestDto) {
-        Integer rowsAffected = userRepository.insert(userRequestDto);
-        if (rowsAffected.equals(0)) return "No se pudo crear el usuario";
-        return "Se creo correctamente el usuario";
-    }
+
 
     @Override
     public List<UserRequestDto> getAll() {
@@ -31,6 +27,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserRequestDto getByEmail(String email) {
-        return userRepository.getByEmail(email);
+        UserRequestDto user=mapUserToUserResponseDto(userRepository.getByEmail(email));
+        return user;
+    }
+    public UserRequestDto mapUserToUserResponseDto(User user){
+        UserRequestDto userRequestDto=new UserRequestDto();
+        userRequestDto.setEmail(user.getEmail());
+        userRequestDto.setName(user.getName());
+        userRequestDto.setLastname(user.getLastname());
+        userRequestDto.setPassword(user.getPassword());
+        return userRequestDto;
     }
 }

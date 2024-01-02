@@ -1,8 +1,10 @@
 package com.project.controller;
 
 import com.project.dto.request.UserRequestDto;
+import com.project.dto.response.AuthenticationResponse;
 import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/user")
-    public String createUser(@RequestBody UserRequestDto userRequestDto){
-        return userService.insert(userRequestDto);
-    }
+
 
     @GetMapping("/user")
     public List<UserRequestDto> getAllUser(){
